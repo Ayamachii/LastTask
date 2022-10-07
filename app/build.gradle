@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'com.example.taskk'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.taskk"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -55,4 +55,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime:2.6.0-alpha02"
     // Saved state module for ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.0-alpha02"
+//picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
 }
