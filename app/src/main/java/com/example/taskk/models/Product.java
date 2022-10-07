@@ -17,6 +17,13 @@ public class Product {
 
     //constructor
 
+    public Product(String title, String description, int price, double rating) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.rating = rating;
+    }
+
     public Product() {
     }
 //without id

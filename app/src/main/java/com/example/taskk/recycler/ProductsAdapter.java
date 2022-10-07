@@ -1,6 +1,8 @@
 package com.example.taskk.recycler;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.taskk.ItemDetails;
+import com.example.taskk.MainActivity;
 import com.example.taskk.R;
+import com.example.taskk.databinding.ActivityItemDetailsBinding;
 import com.example.taskk.models.Product;
 import com.squareup.picasso.Picasso;
 
@@ -23,6 +28,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     private ArrayList<Product> productsList;
     private Context context;
+    ActivityItemDetailsBinding itemDetailsBinding;
 
     public ProductsAdapter(ArrayList<Product> productsList, Context context) {
         this.productsList = productsList;
@@ -53,6 +59,21 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
             Picasso.get().load(productsList.get(position).getThumbnail()).into(holder.prod_img);
         }
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int pos = holder.getAdapterPosition();
+//                Intent toItem = new Intent(v.getContext(), ItemDetails.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("title", String.valueOf(productsList.get(pos).title));
+//                bundle.putString("description", String.valueOf(productsList.get(pos).description));
+//                bundle.putInt("price", productsList.get(pos).price);
+//                bundle.putDouble("rating", productsList.get(pos).rating);
+//                bundle.putString("thumbnail", String.valueOf(productsList.get(pos).thumbnail));
+//                toItem.putExtras(bundle);
+//                Picasso.get().load(productsList.get(pos).getThumbnail()).into(itemDetailsBinding.prodImgD);
+//            }
+//        });
     }
 
     @Override

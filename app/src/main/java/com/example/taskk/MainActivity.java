@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.taskk.models.Product;
@@ -30,14 +33,41 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager manager;
     ProductsAdapter adapter;
     ArrayList<Product> productList;
+    EditText editText;
+
+    String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.found_rv);
-        productList = new ArrayList<>();
 
+        recyclerView = findViewById(R.id.found_rv);
+        editText = findViewById(R.id.searchprod_edttxt);
+        recyclerView = findViewById(R.id.found_rv);
+
+        productList = new ArrayList<>();
+        search = String.valueOf(editText.getText());
+
+        retrofitRecycle();
+
+
+//        if(search == "laptops"){
+//            int x = 0;
+//            ArrayList<Product> laptopsList = new ArrayList<>();
+//            for(int i = 0;i<productList.size();i++){
+//                if(productList.get(i).getCategory()==search){
+//                    laptopsList.add(productList.get(i));
+//                    x++;
+//
+//                }
+//            }
+//            populateRecycler(laptopsList);
+//        }
+
+    }
+
+    private void retrofitRecycle(){
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
         apiInterface.getRoot().enqueue(new Callback<Root>() {
@@ -52,9 +82,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Root> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "Failed to get items", Toast.LENGTH_LONG);
             }
         });
+
+//        recyclerView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, ItemDetails.class);
+//                startActivity(intent);
+//            }
+//        });
+
 
     }
 
@@ -69,5 +108,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-//new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-//        manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
