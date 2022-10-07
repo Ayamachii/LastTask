@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/prod_name"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         android:id="@+id/prod_img"
         />
 

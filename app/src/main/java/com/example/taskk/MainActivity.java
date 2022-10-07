@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.taskk.models.Product;
 import com.example.taskk.models.Root;
 import com.example.taskk.recycler.ProductsAdapter;
+import com.example.taskk.recycler.RecyclerInterface;
 import com.example.taskk.retrofit.ApiInterface;
 import com.example.taskk.retrofit.RetrofitClient;
 
@@ -27,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerInterface {
     
     RecyclerView recyclerView;
     LinearLayoutManager manager;
@@ -101,10 +102,22 @@ public class MainActivity extends AppCompatActivity {
 
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
-        adapter = new ProductsAdapter(productList, this);
+        adapter = new ProductsAdapter(productList, this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(MainActivity.this, ItemDetails.class);
+
+        intent.putExtra("name", productList.get(position).getTitle());
+        intent.putExtra("description", productList.get(position).getDescription());
+        intent.putExtra("rating", productList.get(position).getRating());
+        intent.putExtra("price", productList.get(position).getPrice());
+        intent.putExtra("thumbnail", productList.get(position).getThumbnail());
+
+        startActivity(intent);
+    }
 }

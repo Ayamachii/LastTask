@@ -29,17 +29,19 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     private ArrayList<Product> productsList;
     private Context context;
     ActivityItemDetailsBinding itemDetailsBinding;
+    private final RecyclerInterface recyclerInterface;
 
-    public ProductsAdapter(ArrayList<Product> productsList, Context context) {
+    public ProductsAdapter(ArrayList<Product> productsList, Context context, RecyclerInterface recyclerInterface) {
         this.productsList = productsList;
         this.context = context;
+        this.recyclerInterface = recyclerInterface;
     }
 
     @NonNull
     @Override
     public ProductsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.prod_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, recyclerInterface);
     }
 
     @Override
@@ -59,21 +61,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
             Picasso.get().load(productsList.get(position).getThumbnail()).into(holder.prod_img);
         }
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int pos = holder.getAdapterPosition();
-//                Intent toItem = new Intent(v.getContext(), ItemDetails.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("title", String.valueOf(productsList.get(pos).title));
-//                bundle.putString("description", String.valueOf(productsList.get(pos).description));
-//                bundle.putInt("price", productsList.get(pos).price);
-//                bundle.putDouble("rating", productsList.get(pos).rating);
-//                bundle.putString("thumbnail", String.valueOf(productsList.get(pos).thumbnail));
-//                toItem.putExtras(bundle);
-//                Picasso.get().load(productsList.get(pos).getThumbnail()).into(itemDetailsBinding.prodImgD);
-//            }
-//        });
     }
 
     @Override
@@ -81,7 +68,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         return productsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView prod_price;
         TextView prod_descr;
@@ -90,7 +77,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         AppCompatButton fav_btn;
         CardView cardView;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, RecyclerInterface recyclerInterface) {
             super(itemView);
 
             prod_price = itemView.findViewById(R.id.prod_price);
@@ -99,6 +86,20 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             prod_img = itemView.findViewById(R.id.prod_img);
             fav_btn = itemView.findViewById(R.id.fav_btn);
             cardView = itemView.findViewById(R.id.cardview);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(recyclerInterface != null){
+                        int pos = getAdapterPosition();
+
+                        if(pos != RecyclerView.NO_POSITION){
+                            recyclerInterface.onItemClick(pos);
+                        }
+
+                    }
+                }
+            });
         }
     }
 }
