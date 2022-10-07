@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskk.R;
@@ -36,13 +38,21 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ProductsAdapter.ViewHolder holder, int position) {
-        //holder.prod_img = productsList.get(position).getImages().get(0)
-        holder.prod_price.setText("$"+Float.valueOf(productsList.get(position).getPrice()));
-        holder.prod_name.setText(String.valueOf(productsList.get(position).getTitle()));
-        holder.prod_descr.setText(String.valueOf(productsList.get(position).getDescription()));
+        if(position==0){
+            holder.prod_name.setText(String.valueOf("Found 10 Results"));
+            holder.prod_name.setLines(2);
+            holder.prod_name.setTextSize(25f);
+            holder.cardView.setBackground(null);
+            holder.fav_btn.setVisibility(View.GONE);
+        }
+        else {
+            //holder.prod_img = productsList.get(position).getImages().get(0)
+            holder.prod_price.setText("$" + Float.valueOf(productsList.get(position).getPrice()));
+            holder.prod_name.setText(String.valueOf(productsList.get(position).getTitle()));
+            holder.prod_descr.setText(String.valueOf(productsList.get(position).getDescription()));
 
-        Picasso.get().load(productsList.get(position).getThumbnail()).into(holder.prod_img);
-
+            Picasso.get().load(productsList.get(position).getThumbnail()).into(holder.prod_img);
+        }
     }
 
     @Override
@@ -56,6 +66,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         TextView prod_descr;
         TextView prod_name;
         ImageView prod_img;
+        AppCompatButton fav_btn;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +76,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             prod_descr = itemView.findViewById(R.id.prod_descr);
             prod_name = itemView.findViewById(R.id.prod_name);
             prod_img = itemView.findViewById(R.id.prod_img);
+            fav_btn = itemView.findViewById(R.id.fav_btn);
+            cardView = itemView.findViewById(R.id.cardview);
         }
     }
 }
