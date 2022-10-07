@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -55,21 +56,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        recyclerView = findViewById(R.id.found_rv);
-//        manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-//        recyclerView.setLayoutManager(manager);
-//        populateRecycler();
-//        adapter = new ProductsAdapter(productList);
-//        recyclerView.setAdapter(adapter);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        
-
     }
 
     private void populateRecycler(ArrayList<Product> productList) {
 
-        manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         adapter = new ProductsAdapter(productList, this);
         recyclerView.setAdapter(adapter);
@@ -77,22 +68,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-//    private void populateRecycler() {
-//        RetrofitClient.getRetrofitClient().getRoot().enqueue(new Callback<Root>() {
-//            @Override
-//            public void onResponse(Call<Root> call, Response<Root> response) {
-//                if(response.isSuccessful()&&response.body()!=null){
-//
-//                    productList.addAll(response.body().getProducts());
-//                    adapter.notifyDataSetChanged();
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Root> call, Throwable t) {
-//
-//            }
-//        });
-//    }
 }
+//new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+//        manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

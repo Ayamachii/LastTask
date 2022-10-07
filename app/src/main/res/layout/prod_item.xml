@@ -2,16 +2,18 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:elevation="5dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="15dp"
     android:background="@drawable/curved_border">
     <!--add margins-->
     <!--170 245-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp">
+        android:padding="18dp">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/prod_name"
+        android:scaleType="fitXY"
         android:id="@+id/prod_img"
         android:src="@drawable/finhair"/>
 
@@ -27,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:layout_marginTop="5dp"
         android:id="@+id/prod_name"
         android:text="Facial Cleanser"
@@ -38,8 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#b4b4b4"
+            android:maxLines="2"
             android:id="@+id/prod_descr"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:text="Citrus refreshes senses"
             app:layout_constraintTop_toBottomOf="@id/prod_name"
             />
@@ -50,17 +54,20 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:id="@+id/prod_price"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:text="9.99"
             app:layout_constraintTop_toBottomOf="@id/prod_descr"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/prod_descr"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toTopOf="@id/prod_price"
+            app:layout_constraintBottom_toBottomOf="@id/prod_price"
             android:background="@drawable/blackrnd_border"
-            android:foreground="@drawable/heart_svgrepo_com"
+            android:foreground="@drawable/img"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

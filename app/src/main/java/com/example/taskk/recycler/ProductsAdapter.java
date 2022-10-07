@@ -37,7 +37,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ProductsAdapter.ViewHolder holder, int position) {
         //holder.prod_img = productsList.get(position).getImages().get(0)
-        holder.prod_price.setText(String.valueOf(productsList.get(position).getPrice()));
+        holder.prod_price.setText("$"+Float.valueOf(productsList.get(position).getPrice()));
         holder.prod_name.setText(String.valueOf(productsList.get(position).getTitle()));
         holder.prod_descr.setText(String.valueOf(productsList.get(position).getDescription()));
 
