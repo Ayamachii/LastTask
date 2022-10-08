@@ -2,6 +2,7 @@ package com.example.taskk;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.media.Image;
@@ -20,9 +21,9 @@ public class ItemDetails extends AppCompatActivity {
     private static int counter = 0;
     ActivityItemDetailsBinding itemDetailsBinding;
     TextView counter_txtview;
-    AppCompatButton plus_btn;
-    AppCompatButton minus_btn;
-    AppCompatButton back_btn;
+    ImageView plus_btn;
+    ImageView minus_btn;
+    ImageView back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
